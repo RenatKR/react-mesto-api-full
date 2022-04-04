@@ -1,0 +1,22 @@
+.auth__input {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    margin-top: 60px;
+    border-bottom: 2px solid #CCCCCC;
+    box-sizing: content-box;
+    background-color: transparent;
+    width: 358px;
+    
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    
+}
+
+.login__input:last-child {
+    margin-top: 30px;
+}

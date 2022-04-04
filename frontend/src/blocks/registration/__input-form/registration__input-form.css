@@ -1,0 +1,8 @@
+.registration__input-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: 1px solid blue;
+}

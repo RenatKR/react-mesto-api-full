@@ -1,0 +1,13 @@
+.photo-grid {
+  max-width: calc(100% - 400px);
+  margin: 0 auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+@media (max-width: 1050px) {
+  .photo-grid {
+    max-width: calc(100% - 38px);
+  }
+}
