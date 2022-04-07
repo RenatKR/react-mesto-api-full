@@ -5,7 +5,7 @@ const ValidationError = require('../errors/ValidationError');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(next);
 };
 
@@ -17,7 +17,7 @@ module.exports.createCard = (req, res, next) => {
       if (!card) {
         throw new ValidationError('Переданы некорректные данные при создании карточки');
       }
-      res.status(200).send({ _id: card._id });
+      res.status(200).send(card);
     })
     .catch(next);
 };
@@ -50,7 +50,7 @@ module.exports.setLikeCard = (req, res, next) => {
       throw new NotFoundError('Карточка с указанным _id не найдена');
     })
     .then((card) => {
-      res.status(200).send({ data: card });
+      res.status(200).send(card);
     })
     .catch(next);
 };
@@ -68,7 +68,7 @@ module.exports.deleteLikeCard = (req, res, next) => {
       throw new NotFoundError('Карточка с указанным _id не найдена');
     })
     .then((card) => {
-      res.status(200).send({ data: card });
+      res.status(200).send(card);
     })
     .catch(next);
 };

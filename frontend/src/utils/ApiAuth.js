@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.kurbangaliev1987.nomoredomains.work";
+export const BASE_URL = "http://localhost:3001";
 
 function checkRes(res) {
   if (res.ok) {
@@ -36,7 +36,7 @@ export const checkToken = (token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: token,
     },
   }).then((res) => {
     return checkRes(res);

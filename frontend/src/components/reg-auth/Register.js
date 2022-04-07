@@ -20,7 +20,6 @@ export default function Register(props) {
   function handleSubmit(e) {
     e.preventDefault();
     const { password, email } = state;
-    console.log(password);
     if (!password || !email) return;
     props.handleRegister(password, email);
     setState({ password: "", email: "", message: "" });

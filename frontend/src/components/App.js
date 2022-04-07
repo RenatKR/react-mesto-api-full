@@ -136,18 +136,18 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   function transformCard(item) {
-    return {
+      return {
       _id: item._id,
       src: item.link,
       title: item.name,
       likesNum: item.likes.length,
       likesArr: item.likes,
-      owner: item.owner._id,
+      owner: item.owner,
     };
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likesArr.some((i) => i._id === currentUser._id);
+    const isLiked = card.likesArr.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -170,14 +170,14 @@ function App() {
     api
       .getInitialCards()
       .then((data) => {
-        setCards(
+         setCards(
           data.map((item) => ({
             _id: item._id,
             src: item.link,
             title: item.name,
             likesNum: item.likes.length,
             likesArr: item.likes,
-            owner: item.owner._id,
+            owner: item.owner,
           }))
         );
       })
@@ -210,13 +210,12 @@ function App() {
   function handleTokenCheck() {
     if (!localStorage.getItem("jwt")) return;
     const jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     ApiAuth.checkToken(jwt)
       .then((res) => {
         if (!res) return;
         setCurrentUser((old) => ({
           ...old,
-          email: res.data.email,
+          email: res.email,
         }));
         setLoggedIn(true);
         history.push("/");
@@ -244,7 +243,6 @@ function App() {
   function handleLogin(password, email) {
     ApiAuth.authorize(password, email)
       .then((data) => {
-        console.log(data)
         if (data) {
           setCurrentUser((old) => ({
             ...old,
@@ -252,7 +250,7 @@ function App() {
           }));
           setLoggedIn(true);
           history.push("/");
-          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("jwt", data.token); //записывается в браузер
         }
       })
       .catch((err) => console.log(err));

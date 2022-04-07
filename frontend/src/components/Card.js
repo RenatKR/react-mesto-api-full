@@ -7,19 +7,17 @@ export default function Card(card) {
 
   const isOwn = currentUser._id === card.owner;
 
-  const isLiked = card.likesArr.some((i) => i._id === currentUser._id);
+  const isLiked = card.likesArr.some((i) => i === currentUser._id);
 
-  const cardLikeButtonClassName = `card__like ${
-    isLiked ? "card__like_active" : " "
-  }`;
+  const cardLikeButtonClassName = `card__like ${isLiked ? "card__like_active" : " "
+    }`;
 
   function handleClick() {
     card.onCardClick(card.src, card.title);
   }
 
-  const cardTrashButtonClassName = `card__trash ${
-    isOwn ? "card__trash_visible" : "card__trash_hidden"
-  }`;
+  const cardTrashButtonClassName = `card__trash ${isOwn ? "card__trash_visible" : "card__trash_hidden"
+    }`;
 
   function handleLikeClick() {
     card.onCardLike(card);
