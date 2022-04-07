@@ -136,7 +136,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   function transformCard(item) {
-      return {
+    return {
       _id: item._id,
       src: item.link,
       title: item.name,
@@ -170,8 +170,8 @@ function App() {
     api
       .getInitialCards()
       .then((data) => {
-         setCards(
-          data.map((item) => ({
+        setCards(
+          data.reverse().map((item) => ({
             _id: item._id,
             src: item.link,
             title: item.name,
@@ -266,7 +266,7 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-          <Header onClick={signOut}/>
+          <Header onClick={signOut} />
           <Switch>
             <Route exact path="/">
               <ProtectedRoute loggedIn={loggedIn}>
