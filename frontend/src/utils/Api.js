@@ -81,7 +81,7 @@ class Api {
 //
 
 const api = new Api({
-  url: "https://api.kurbangaliev1987.nomoredomains.work",
+  url: "http://api.kurbangaliev1987.nomoredomains.work",
   // headers: {
   //   authorization: "5fdc434d-6d5b-4e32-8137-00f87a447f90",
   //   "Content-Type": "application/json",
