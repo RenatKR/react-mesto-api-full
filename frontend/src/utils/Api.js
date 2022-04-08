@@ -83,7 +83,7 @@ class Api {
 const jwt = localStorage.getItem("jwt");
 
 const api = new Api({
-  url: "http://localhost:3000",
+  url: "https://api.kurbangaliev1987.nomoredomains.work",
   headers: {
     authorization: jwt,
     "Content-Type": "application/json",

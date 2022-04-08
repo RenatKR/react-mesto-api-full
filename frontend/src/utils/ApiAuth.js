@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.kurbangaliev1987.nomoredomains.work";
 
 function checkRes(res) {
   if (res.ok) {
