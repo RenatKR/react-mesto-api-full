@@ -250,7 +250,7 @@ function App() {
           }));
           setLoggedIn(true);
           history.push("/");
-          localStorage.setItem("jwt", data.token); //записывается в браузер
+          localStorage.setItem("jwt", data.token);
         }
       })
       .catch((err) => console.log(err));
