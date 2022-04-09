@@ -85,7 +85,7 @@ const jwt = localStorage.getItem("jwt");
 const api = new Api({
   url: "https://api.kurbangaliev1987.nomoredomains.work",
   headers: {
-    authorization: jwt,
+    authorization: `Bearer ${jwt}`,
     "Content-Type": "application/json",
   },
 });

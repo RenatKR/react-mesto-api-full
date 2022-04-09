@@ -244,9 +244,14 @@ function App() {
     ApiAuth.authorize(password, email)
       .then((data) => {
         if (data) {
+          console.log(data)
           setCurrentUser((old) => ({
             ...old,
-            email: email,
+            _id: data.user._id,
+            name: data.user.name,
+            description: data.user.about,
+            src: data.user.avatar,
+            email: data.user.email,
           }));
           setLoggedIn(true);
           history.push("/");
