@@ -244,7 +244,6 @@ function App() {
     ApiAuth.authorize(password, email)
       .then((data) => {
         if (data) {
-          console.log(data)
           setCurrentUser((old) => ({
             ...old,
             _id: data._id,
