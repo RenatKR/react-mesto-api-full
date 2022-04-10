@@ -247,11 +247,11 @@ function App() {
           console.log(data)
           setCurrentUser((old) => ({
             ...old,
-            _id: data.user._id,
-            name: data.user.name,
-            description: data.user.about,
-            src: data.user.avatar,
-            email: data.user.email,
+            _id: data._id,
+            name: data.name,
+            description: data.about,
+            src: data.avatar,
+            email: data.email,
           }));
           setLoggedIn(true);
           history.push("/");
