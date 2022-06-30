@@ -18,4 +18,4 @@
 
 Технологии: *JavaScript, React, NodeJS, Express, MongoDB, Postman*.
 
-Ссылка: *(ссылку я сделаю на неделе после 26 июня, не дома сейчас, ssh-ключи на другом компе)*
+Ссылка: https://kurbangaliev1987.nomoredomains.work
