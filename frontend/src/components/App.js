@@ -36,6 +36,11 @@ import ProtectedRoute from "./ProtectedRoute";
 import * as ApiAuth from "../utils/ApiAuth";
 
 function App() {
+
+  const [jwtIsChanged, setJwtIsChanged] = React.useState(false);
+  
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
   };
@@ -82,7 +87,7 @@ function App() {
 
   React.useEffect(() => {
     api
-      .getUserInfo()
+      .getUserInfo(localStorage.getItem('jwt'))
       .then((data) => {
         setCurrentUser((old) => ({
           ...old,
@@ -97,7 +102,7 @@ function App() {
 
   function handleUpdateUser(data) {
     api
-      .editUserInfo(data)
+      .editUserInfo(data, localStorage.getItem('jwt'))
       .then((data) => {
         setCurrentUser((old) => ({
           ...old,
@@ -115,7 +120,7 @@ function App() {
 
   function handleUpdateAvatar(data) {
     api
-      .editUserAva(data)
+      .editUserAva(data, localStorage.getItem('jwt'))
       .then((data) => {
         setCurrentUser((old) => ({
           ...old,
@@ -149,7 +154,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likesArr.some((i) => i === currentUser._id);
     api
-      .changeLikeCardStatus(card._id, isLiked)
+      .changeLikeCardStatus(card._id, isLiked, localStorage.getItem('jwt'))
       .then((newCard) => {
         const a = transformCard(newCard);
         setCards((state) => state.map((c) => (c._id === card._id ? a : c)));
@@ -159,7 +164,7 @@ function App() {
 
   const handleCardDelete = (card) => {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, localStorage.getItem('jwt'))
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
@@ -168,7 +173,7 @@ function App() {
 
   React.useEffect(() => {
     api
-      .getInitialCards()
+      .getInitialCards(localStorage.getItem('jwt'))
       .then((data) => {
         setCards(
           data.reverse().map((item) => ({
@@ -182,11 +187,11 @@ function App() {
         );
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn, jwtIsChanged]);
 
   function handleAddPlaceSubmit(card) {
     api
-      .addNewCard(card)
+      .addNewCard(card, localStorage.getItem('jwt'))
       .then((card) => {
         const newCard = transformCard(card);
         setCards([newCard, ...cards]);
@@ -199,13 +204,11 @@ function App() {
 
   //sprint 12
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
-
   const history = useHistory();
 
   React.useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [loggedIn, jwtIsChanged]);
 
   function handleTokenCheck() {
     if (!localStorage.getItem("jwt")) return;
@@ -216,6 +219,10 @@ function App() {
         setCurrentUser((old) => ({
           ...old,
           email: res.email,
+          _id: res._id,
+          name: res.name,
+          description: res.about,
+          src: res.avatar,
         }));
         setLoggedIn(true);
         history.push("/");
@@ -254,6 +261,7 @@ function App() {
           }));
           setLoggedIn(true);
           history.push("/");
+          setJwtIsChanged(true);
           localStorage.setItem("jwt", data.token);
         }
       })
@@ -264,6 +272,7 @@ function App() {
     localStorage.removeItem("jwt");
     history.push("/sign-in");
     setLoggedIn(false);
+    setJwtIsChanged(true);
   }
 
   return (

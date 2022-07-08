@@ -11,67 +11,88 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getInitialCards() {
+  getInitialCards(jwt) {
     return fetch(this._url + "/cards", {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
     }).then((res) => {
       return this.checkRes(res);
     });
   }
 
-  getUserInfo() {
+  getUserInfo(jwt) {
     return fetch(this._url + "/users/me", {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
     }).then((res) => {
       return this.checkRes(res);
     });
   }
 
-  editUserInfo(data) {
+  editUserInfo(data, jwt) {
     return fetch(this._url + "/users/me", {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     }).then((res) => {
       return this.checkRes(res);
     });
   }
 
-  editUserAva(data) {
+  editUserAva(data, jwt) {
     return fetch(this._url + "/users/me/avatar", {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     }).then((res) => {
       return this.checkRes(res);
     });
   }
 
-  addNewCard(data) {
+  addNewCard(data, jwt) {
     return fetch(this._url + "/cards", {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     }).then((res) => {
       return this.checkRes(res);
     });
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, jwt) {
     return fetch(this._url + `/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
     }).then((res) => {
       return this.checkRes(res);
     });
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus(cardId, isLiked, jwt) {
     return fetch(this._url + `/cards/${cardId}/likes`, {
       method: `${isLiked ? "DELETE" : "PUT"}`,
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
     }).then((res) => {
       return this.checkRes(res);
     });
@@ -80,14 +101,8 @@ class Api {
 
 //
 
-const jwt = localStorage.getItem("jwt");
-
 const api = new Api({
-  url: "https://api.kurbangaliev1987.nomoredomains.work",
-  headers: {
-    authorization: `Bearer ${jwt}`,
-    "Content-Type": "application/json",
-  },
+  url: "http://localhost:3000",
 });
 
 export default api;
