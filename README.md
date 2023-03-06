@@ -17,5 +17,3 @@
 При валидации использованы в том числе *регулярные выражения*.
 
 Технологии: *JavaScript, React, NodeJS, Express, MongoDB, Postman*.
-
-Ссылка: https://kurbangaliev1987.nomoredomains.work
